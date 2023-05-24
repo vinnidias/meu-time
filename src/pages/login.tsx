@@ -1,17 +1,24 @@
-import { useContext } from "react";
-import { AuthContext } from "@/contexts/auth";
+import { useContext, useState } from "react";
+
 import { getCountries } from "@/services/getCountries";
 import { useRouter } from "next/router";
+import Cookies from "js-cookie";
 
 export default function Login() {
   const router = useRouter();
-  const { apiKey, setApiKey } = useContext(AuthContext);
+  const [apiKey, setApiKey] = useState("");
+
   const handleLogin = async () => {
-    const { data, errors } = await getCountries(apiKey);
-    if(!errors.token){
-      router.push('/');
+    try {
+      const { data, errors } = await getCountries(apiKey);
+      if (!errors.token) {
+        router.push("/");
+        Cookies.set("api_key", apiKey);
+        console.log("success", data);
+      }
+    } catch (error) {
+      console.log("error: ", error);
     }
-    console.log("login: ", data.data);
   };
 
   return (
