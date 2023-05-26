@@ -1,6 +1,11 @@
+import { ILeagueResponseData } from "@/interfaces/ILeagueResponseData";
 import { api } from "./api";
 
-export const getLeagueByCountry = async (apiKey: string, code: string) => {
+export const getLeagueByCountry = async (
+  apiKey: string
+): Promise<{
+  data: ILeagueResponseData;
+}> => {
   const config = {
     headers: {
       "x-rapidapi-host": "v3.football.api-sports.io",
@@ -8,9 +13,7 @@ export const getLeagueByCountry = async (apiKey: string, code: string) => {
     },
   };
   const res = await api.get("/leagues", config);
-  const leagues: any[] = res.data.response;
+  const data = res.data;
 
-  const legueByCountry = leagues.filter((value) => value.country.name === code);
-  console.log(legueByCountry);
-  return { data: legueByCountry };
+  return { data };
 };
