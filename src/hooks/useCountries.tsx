@@ -12,16 +12,21 @@ export const useCountries = () => {
   useEffect(() => {
     const apiKey = Cookies.get("api_key") || "";
     if (!apiKey) {
-      router.push("login");
+      router.push("/login");
     }
     (async () => {
-      const { data } = await getCountries(apiKey);
+      const { data, errors } = await getCountries(apiKey);
+      if (errors.requests) {
+        window.alert(`A Api retornou o seguinte erro: ${errors.requests}`);
+        Cookies.remove("api_key");
+        router.push("/login");
+      }
       console.log("paises", data);
       setCountries(data);
     })();
   }, [router]);
 
-  return{
-    countries
-  }
+  return {
+    countries,
+  };
 };
