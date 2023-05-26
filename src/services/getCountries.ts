@@ -6,7 +6,7 @@ export const getCountries = async (
 ): Promise<{
   data: ICountriesProps[];
   status: number;
-  errors: { token: string };
+  errors: { token?: string; requests?: string };
 }> => {
   const config = {
     headers: {
