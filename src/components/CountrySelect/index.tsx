@@ -10,7 +10,10 @@ interface IProps {
 
 export const CountrySelect = ({ options, onChange }: IProps) => {
   const [isVisible, setIsVisible] = useState(false);
-  const [onFocus, setOnFocus] = useState({
+  const [onFocus, setOnFocus] = useState<{
+    flag: string | null;
+    name: string | null;
+  }>({
     flag: "",
     name: "",
   });
@@ -19,15 +22,19 @@ export const CountrySelect = ({ options, onChange }: IProps) => {
       className={styles.countryContainer}
       onClick={() => setIsVisible(!isVisible)}
     >
-      <span>
+      <span className={styles.onFocus}>
         {onFocus.name ? (
           <>
-            <Image
-              src={onFocus.flag}
-              alt="bandeira do país"
-              width={25}
-              height={25}
-            />
+            {onFocus.flag ? (
+              <Image
+                src={onFocus.flag}
+                alt="bandeira do país"
+                width={25}
+                height={25}
+              />
+            ) : (
+              <span style={{ width: 25, height: 25 }}></span>
+            )}
             {onFocus.name}
           </>
         ) : (
@@ -44,13 +51,15 @@ export const CountrySelect = ({ options, onChange }: IProps) => {
                 setOnFocus({ flag: country.flag, name: country.name });
               }}
             >
-              {country.flag && (
+              {country.flag ? (
                 <Image
                   src={country.flag}
                   alt="bandeira do país"
                   width={25}
                   height={25}
                 />
+              ) : (
+                <span style={{ width: 25, height: 25 }}></span>
               )}{" "}
               <span>{country.name}</span>
             </ul>
