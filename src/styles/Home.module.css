@@ -1,0 +1,36 @@
+.selectorBar {
+  display: flex;
+  gap: 1em;
+  padding: 0 4em;
+  align-items: flex-start;
+  justify-content: center;
+  width: 100%;
+  max-height: fit-content;
+
+}
+
+.dataSection {
+  padding: 2em 4em;
+  width: 100%;
+  margin: 0 auto;
+}
+
+
+
+@media(max-width: 800px) {
+  .selectorBar {
+    display: flex;
+    align-items: center;
+    padding: 0;
+    flex-direction: column;
+
+    width: 100%;
+    gap: 1em
+  }
+
+  .dataSection {
+    padding: 2em;
+    width: 100%;
+    margin: 0 auto;
+  }
+}
