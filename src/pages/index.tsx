@@ -1,17 +1,22 @@
 import Image from "next/image";
 
+import Cookies from "js-cookie";
+import { useRouter } from "next/router";
+
 import { useCountries } from "@/hooks/useCountries";
 import { useLeagues } from "@/hooks/useLeagues";
 import { CountrySelect } from "@/components/CountrySelect";
 import { LeagueSelect } from "@/components/LeagueSelect";
 import { useTeams } from "@/hooks/useTeams";
 
-import styles from "../styles/Home.module.css";
 import { SeasonSelect } from "@/components/SeasonSelect";
 import { TeamSelect } from "@/components/TeamSelect";
 import { TeamPlayersTable } from "@/components/TeamPlayersTable";
+import { Navbar } from "@/components/Navbar";
+import styles from "../styles/Home.module.css";
 
 export default function Home() {
+  const router = useRouter();
   const { countries } = useCountries();
   const {
     countrySelected,
@@ -35,8 +40,13 @@ export default function Home() {
   return (
     <>
       {countries.length > 0 ? (
-        <div className={styles.mainContainer}>
-          <h1>Meu time</h1>
+        <div>
+          <Navbar
+            onCLick={() => {
+              Cookies.remove("api_key");
+              router.push("/login");
+            }}
+          />
           <div className={styles.selectorBar}>
             <CountrySelect
               options={countries}
