@@ -14,6 +14,7 @@ import { TeamSelect } from "@/components/TeamSelect";
 import { TeamPlayersTable } from "@/components/TeamPlayersTable";
 import { Navbar } from "@/components/Navbar";
 import styles from "../styles/Home.module.css";
+import { GraphicSection } from "@/components/GraphicSection";
 
 export default function Home() {
   const router = useRouter();
@@ -36,7 +37,6 @@ export default function Home() {
     teamPlayers,
   } = useTeams();
 
-  console.log("times: ", teams);
   return (
     <>
       {countries.length > 0 ? (
@@ -77,8 +77,20 @@ export default function Home() {
             ) : null}
           </div>
 
+          <div className={styles.logoSection}>
+            <Image
+              src={teamStats.team.logo}
+              alt="Brasão do time"
+              width={80}
+              height={80}
+            />{" "}
+            <p>{teamStats.team.name}</p>
+          </div>
           <section className={styles.dataSection}>
-            <TeamPlayersTable teamPlayers={teamPlayers} />
+            {teamPlayers.length > 0 && (
+              <TeamPlayersTable teamPlayers={teamPlayers} />
+            )}
+            {<GraphicSection teamStatistic={teamStats} />}
           </section>
         </div>
       ) : null}
