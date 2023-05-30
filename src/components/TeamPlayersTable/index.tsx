@@ -12,7 +12,7 @@ export const TeamPlayersTable = ({ teamPlayers }: IProps) => {
     <table className={styles.teamPlayersTable}>
       <thead>
         <tr>
-          <th>Foto</th>
+          <th></th>
           <th>Nome</th>
           <th>Idade</th>
           <th>Nacionalidade</th>
