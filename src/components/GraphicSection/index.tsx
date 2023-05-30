@@ -15,7 +15,6 @@ export const GraphicSection = ({ teamStatistic }: IProps) => {
     ...listStats[index],
   }));
 
-  console.log("times: ", teamStatistic);
   return (
     <div className={styles.dataContainer}>
       <div className={styles.infoContainer}>
