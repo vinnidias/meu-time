@@ -1,42 +1,72 @@
 .seasonContainer {
   display: flex;
   flex-direction: column;
+  transition: .4s;
+  width: 25%;
 }
 
-.seasonContainer {
+.onFocus {
   display: flex;
-  flex-direction: column;
-}
-
-.seasonContainer span:nth-child(1) {
-  display: flex;
+  justify-content: center;
   gap: 1em;
   align-items: center;
   cursor: pointer;
-  width: 24em;
+  width: 100%;
   height: 6em;
   padding-inline: 1em;
   border-radius: 5px;
-  background-color: rgba(132, 237, 223, 0.6);
+  background-color: rgb(27, 197, 189, .8);
+  font-weight: 600;
+  color: #fff;
   box-shadow: 1px 2px 6px -2px rgba(0, 0, 0, 0.6);
 }
 
 .seasonContainer li {
   display: block;
-  background-color: rgba(132, 237, 223, 0.6);
-  padding-inline: 1em;
+  gap: 2em;
+  background-color: rgb(27, 197, 189, .8);
+  padding: .6em 1em;
   border-radius: 5px;
   list-style: none;
   display: flex;
   flex-direction: column;
-  width: 24em;
+  width: 100%;
   height: 200px;
   overflow-y: scroll;
+  transition: .4s;
+  overflow-y: scroll;
+}
+
+.seasonContainer li::-webkit-scrollbar {
+  width: 7px;
+}
+
+.seasonContainer li::-webkit-scrollbar-track {
+  border-radius: 10px;
+}
+
+.seasonContainer li::-webkit-scrollbar-thumb {
+  background: #f1f1f1;
+  border-radius: 10px;
+}
+
+.seasonContainer li::-webkit-scrollbar-thumb:hover {
+  background: #bbbbbb;
 }
 
 .seasonContainer li ul {
   display: flex;
   gap: 1em;
   align-items: center;
+  justify-content: center;
   cursor: pointer;
+  font-weight: 600;
+  color: #fff;
+}
+
+
+@media(max-width: 800px) {
+  .seasonContainer {
+    width: 90%;
+  }
 }

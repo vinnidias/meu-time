@@ -17,18 +17,18 @@ export const SeasonSelect = ({ options, onChange }: IProps) => {
       className={styles.seasonContainer}
       onClick={() => setIsVisible(!isVisible)}
     >
-      <span>
+      <span className={styles.onFocus}>
         {onFocus > 0 ? (
           <>
             <span>{onFocus}</span>
           </>
         ) : (
-          <>Selecione a Liga</>
+          <p>Selecione a Temporada</p>
         )}
       </span>
       {isVisible && (
         <li>
-          {options.map((season, index) => (
+          {options.sort((a,b)=> b.year - a.year).map((season, index) => (
             <ul
               key={index}
               onClick={() => {
