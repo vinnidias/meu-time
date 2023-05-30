@@ -5,6 +5,8 @@ export const getLeagueByCountry = async (
   apiKey: string
 ): Promise<{
   data: ILeagueResponseData;
+  status: number;
+  errors: { token?: string; requests?: string };
 }> => {
   const config = {
     headers: {
@@ -13,7 +15,9 @@ export const getLeagueByCountry = async (
     },
   };
   const res = await api.get("/leagues", config);
-  const data = res.data;
+  const data = res.data.response;
+  const status = res.data.status;
+  const errors = res.data.errors;
 
-  return { data };
+  return { data, status, errors };
 };

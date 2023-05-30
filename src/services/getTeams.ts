@@ -1,3 +1,4 @@
+import { ITeamData } from "@/interfaces/ITeamData";
 import { api } from "./api";
 
 export const getTeams = async (
@@ -5,7 +6,9 @@ export const getTeams = async (
   leagueId: number,
   season: number
 ): Promise<{
-  data: any;
+  data: ITeamData[];
+  status: number;
+  errors: { token?: string; requests?: string };
 }> => {
   const config = {
     headers: {
@@ -18,7 +21,9 @@ export const getTeams = async (
     config
   );
 
-  const data = res.data;
+  const data = res.data.response;
+  const status = res.data.status;
+  const errors = res.data.errors;
 
-  return { data };
+  return { data, status, errors };
 };
