@@ -78,19 +78,23 @@ export default function Home() {
           </div>
 
           <div className={styles.logoSection}>
-            <Image
-              src={teamStats.team.logo}
-              alt="Brasão do time"
-              width={80}
-              height={80}
-            />{" "}
-            <p>{teamStats.team.name}</p>
+            {teams.length > 0 && (
+              <>
+                <Image
+                  src={teamStats.team.logo}
+                  alt="Brasão do time"
+                  width={80}
+                  height={80}
+                />{" "}
+                <p>{teamStats.team.name}</p>
+              </>
+            )}
           </div>
           <section className={styles.dataSection}>
             {teamPlayers.length > 0 && (
               <TeamPlayersTable teamPlayers={teamPlayers} />
             )}
-            {<GraphicSection teamStatistic={teamStats} />}
+            {teams.length > 0 && <GraphicSection teamStatistic={teamStats} />}
           </section>
         </div>
       ) : null}
