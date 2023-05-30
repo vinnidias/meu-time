@@ -6,11 +6,30 @@
   justify-content: center;
   width: 100%;
   max-height: fit-content;
+}
 
+.logoSection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  gap: .6em;
+  padding-top: 2.5em;
+  margin-bottom: 1em;
+}
+
+.logoSection p {
+  font-weight: 600;
+  font-size: 1.2em;
 }
 
 .dataSection {
-  padding: 2em 4em;
+  background-color: #f7f5f5;
+  display: flex;
+  gap: 1.6em;
+  justify-content: space-between;
+  padding: 0 4em;
   width: 100%;
   margin: 0 auto;
 }
@@ -29,6 +48,7 @@
   }
 
   .dataSection {
+    flex-direction: column;
     padding: 2em;
     width: 100%;
     margin: 0 auto;
