@@ -20,12 +20,9 @@ export const useLeagues = () => {
     }
     (async () => {
       try {
-        const { data } = await getLeagueByCountry(apiKey);
-        const leagues = data.response;
-        const leaguesByCountry = leagues.filter(
-          (value) => value.country.name === countrySelected
-        );
-        setLeagueByCountry(leaguesByCountry);
+        const { data } = await getLeagueByCountry(apiKey, countrySelected);
+
+        setLeagueByCountry(data);
       } catch (error) {
         console.log(error);
       }

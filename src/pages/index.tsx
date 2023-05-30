@@ -29,6 +29,7 @@ export default function Home() {
   } = useLeagues();
   const {
     teams,
+    teamSelected,
     seasonSelected,
     setSeasonSelected,
     setLeagueId,
@@ -78,15 +79,15 @@ export default function Home() {
           </div>
 
           <div className={styles.logoSection}>
-            {teams.length > 0 && (
+            {teamSelected.logo && (
               <>
                 <Image
-                  src={teamStats.team.logo}
+                  src={teamSelected.logo}
                   alt="Brasão do time"
                   width={80}
                   height={80}
                 />{" "}
-                <p>{teamStats.team.name}</p>
+                <p>{teamSelected.name}</p>
               </>
             )}
           </div>
@@ -94,7 +95,9 @@ export default function Home() {
             {teamPlayers.length > 0 && (
               <TeamPlayersTable teamPlayers={teamPlayers} />
             )}
-            {teams.length > 0 && <GraphicSection teamStatistic={teamStats} />}
+            {teamStats.team.name && (
+              <GraphicSection teamStatistic={teamStats} />
+            )}
           </section>
         </div>
       ) : null}

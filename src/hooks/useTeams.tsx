@@ -38,12 +38,11 @@ export const useTeams = () => {
       try {
         const { data } = await getTeams(apiKey, leagueId, seasonSelected);
         setTeams(data);
-        console.log("TIMES", teams);
       } catch (error) {
         console.log("teams req fail: ", error);
       }
     })();
-  }, [router, leagueId, seasonSelected, teams]);
+  }, [router, leagueId, seasonSelected]);
 
   useEffect(() => {
     const apiKey = Cookies.get("api_key") || "";
