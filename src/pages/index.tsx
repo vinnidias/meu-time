@@ -1,4 +1,3 @@
-"use-client";
 import Image from "next/image";
 
 import { useCountries } from "@/hooks/useCountries";
@@ -7,8 +6,10 @@ import { CountrySelect } from "@/components/CountrySelect";
 import { LeagueSelect } from "@/components/LeagueSelect";
 import { useTeams } from "@/hooks/useTeams";
 
-import Cookies from "js-cookie";
+import styles from "../styles/Home.module.css";
 import { SeasonSelect } from "@/components/SeasonSelect";
+import { TeamSelect } from "@/components/TeamSelect";
+import { TeamPlayersTable } from "@/components/TeamPlayersTable";
 
 export default function Home() {
   const { countries } = useCountries();
@@ -19,23 +20,24 @@ export default function Home() {
     leagueSelect,
     setLeagueSelect,
     seasons,
-   
   } = useLeagues();
-  const { teams, setSeason, setLeagueId } = useTeams();
+  const {
+    teams,
+    seasonSelected,
+    setSeasonSelected,
+    setLeagueId,
+    setTeamSelected,
+    teamStats,
+    teamPlayers,
+  } = useTeams();
 
   console.log("times: ", teams);
   return (
-    <div>
-      {countries.length ? (
-        <>
+    <>
+      {countries.length > 0 ? (
+        <div className={styles.mainContainer}>
           <h1>Meu time</h1>
-          <div
-            style={{
-              display: "flex",
-              padding: "0 10em",
-              gap: "3em",
-            }}
-          >
+          <div className={styles.selectorBar}>
             <CountrySelect
               options={countries}
               onChange={(e) => setCountrySelected(e.name)}
@@ -46,7 +48,7 @@ export default function Home() {
                 options={leagueByCountry}
                 onChange={(e) => {
                   setLeagueSelect(e.league.name);
-                  setLeagueId(e.league.id)
+                  setLeagueId(e.league.id);
                 }}
               />
             )}
@@ -54,12 +56,22 @@ export default function Home() {
             {leagueSelect && (
               <SeasonSelect
                 options={seasons}
-                onChange={(e)=> setSeason(e)}
+                onChange={(e) => setSeasonSelected(e)}
               />
             )}
+            {seasonSelected ? (
+              <TeamSelect
+                options={teams}
+                onChange={(team) => setTeamSelected(team.team)}
+              />
+            ) : null}
           </div>
-        </>
+
+          <section className={styles.dataSection}>
+            <TeamPlayersTable teamPlayers={teamPlayers} />
+          </section>
+        </div>
       ) : null}
-    </div>
+    </>
   );
 }
