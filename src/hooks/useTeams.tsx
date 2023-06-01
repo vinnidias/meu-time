@@ -27,6 +27,7 @@ export const useTeams = () => {
   const [teamSelected, setTeamSelected] = useState({} as ITeamSelected);
   const [teamStats, setTeamStats] = useState({} as ITeamStats);
   const [teamPlayers, setTeamPlayers] = useState<ITeamPlayerData[]>([]);
+  const [minutesArray, setMinuteArray] = useState<any[]>([]);
   const router = useRouter();
 
   useEffect(() => {
@@ -57,7 +58,7 @@ export const useTeams = () => {
           seasonSelected,
           teamSelected.id
         );
-        setTeamStats(data);
+
         const { data: playersData } = await getTeamPlayers(
           apiKey,
           teamSelected.id,
@@ -65,12 +66,21 @@ export const useTeams = () => {
           leagueId
         );
         setTeamPlayers(playersData);
+        setTeamStats(data);
+
+        const mokedStatsRes = data.goals.for.minute;
+        const listStats = Object.values(mokedStatsRes);
+        const keys = Object.keys(mokedStatsRes);
+        const minutesArray = keys.map((minute, index) => ({
+          time: [`${minute}`],
+          ...listStats[index],
+        }));
+        setMinuteArray(minutesArray);
       } catch (error) {
         console.log("team req fail: ", error);
       }
     })();
   }, [leagueId, teamSelected, seasonSelected, router]);
-
   return {
     teams,
     seasonSelected,
@@ -80,5 +90,6 @@ export const useTeams = () => {
     setTeamSelected,
     teamStats,
     teamPlayers,
+    minutesArray,
   };
 };
