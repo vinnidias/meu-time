@@ -1,9 +1,8 @@
 # Desafio Front End Trade Technology.
 
 Projeto criado com NexttJS para integração com a API-Footbal. <br>
-Está hospedado na Vercel e pode ser acessado [CLICANDO AQUI](https://meu-time-woad.vercel.app/login)! 
 
- Ou pode ser instalado para rodar localmente.
+Siga os passos abaixo para instalar e rodar localmente.
   
  ## Instalação e Execução
  
