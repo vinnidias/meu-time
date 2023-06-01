@@ -29,12 +29,13 @@ export default function Home() {
   } = useLeagues();
   const {
     teams,
+    teamStats,
     teamSelected,
     seasonSelected,
     setSeasonSelected,
     setLeagueId,
     setTeamSelected,
-    teamStats,
+
     teamPlayers,
   } = useTeams();
 
@@ -78,27 +79,29 @@ export default function Home() {
             ) : null}
           </div>
 
-          <div className={styles.logoSection}>
-            {teamSelected.logo && (
-              <>
-                <Image
-                  src={teamSelected.logo}
-                  alt="Brasão do time"
-                  width={80}
-                  height={80}
-                />{" "}
-                <p>{teamSelected.name}</p>
-              </>
-            )}
-          </div>
-          <section className={styles.dataSection}>
-            {teamPlayers.length > 0 && (
-              <TeamPlayersTable teamPlayers={teamPlayers} />
-            )}
-            {teamStats.team.name && (
-              <GraphicSection teamStatistic={teamStats} />
-            )}
-          </section>
+          {teamPlayers.length > 0 && (
+            <>
+              <div className={styles.logoSection}>
+                {teamSelected.logo && (
+                  <>
+                    <Image
+                      src={teamSelected.logo}
+                      alt="Brasão do time"
+                      width={80}
+                      height={80}
+                    />{" "}
+                    <p>{teamSelected.name}</p>
+                  </>
+                )}
+              </div>
+              <section className={styles.dataSection}>
+                {teamPlayers.length > 0 && (
+                  <TeamPlayersTable teamPlayers={teamPlayers} />
+                )}
+                {teamStats.team.id > 0 && <GraphicSection />}
+              </section>
+            </>
+          )}
         </div>
       ) : null}
     </>
