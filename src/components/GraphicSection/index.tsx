@@ -2,25 +2,17 @@ import { ITeamStats } from "@/interfaces/ITeamStats";
 import styles from "./styles.module.css";
 
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip } from "recharts";
+import { useTeams } from "@/hooks/useTeams";
 
-interface IProps {
-  teamStatistic: ITeamStats;
-}
-export const GraphicSection = ({ teamStatistic }: IProps) => {
-  const mokedStatsRes = teamStatistic.goals.for.minute;
-  const listStats = Object.values(mokedStatsRes);
-  const keys = Object.keys(mokedStatsRes);
-  const minutesArray = keys.map((minute, index) => ({
-    time: [`${minute}`],
-    ...listStats[index],
-  }));
+export const GraphicSection = () => {
+  const { teamStats, minutesArray } = useTeams();
 
   return (
     <div className={styles.dataContainer}>
       <div className={styles.infoContainer}>
         <p>
-          Formação mais utilizadas: {teamStatistic.lineups[0].formation},
-          utilizada em {teamStatistic.lineups[0].played} partidas
+          Formação mais utilizadas: {teamStats.lineups[0].formation}, utilizada
+          em {teamStats.lineups[0].played} partidas
         </p>
 
         <table>
@@ -34,10 +26,10 @@ export const GraphicSection = ({ teamStatistic }: IProps) => {
           </thead>
           <tbody>
             <tr>
-              <td>{teamStatistic.fixtures.played.total}</td>
-              <td>{teamStatistic.fixtures.wins.total}</td>
-              <td>{teamStatistic.fixtures.draws.total}</td>
-              <td>{teamStatistic.fixtures.loses.total}</td>
+              <td>{teamStats.fixtures.played.total}</td>
+              <td>{teamStats.fixtures.wins.total}</td>
+              <td>{teamStats.fixtures.draws.total}</td>
+              <td>{teamStats.fixtures.loses.total}</td>
             </tr>
           </tbody>
         </table>
