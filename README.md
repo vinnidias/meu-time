@@ -2,7 +2,9 @@
 
 Projeto criado com NexttJS para integração com a API-Footbal. <br>
 
-Siga os passos abaixo para instalar e rodar localmente.
+Está hospedado na Vercel e pode ser acessado [CLICANDO AQUI](https://meu-time-vinnidias.vercel.app/login)! 
+
+ Ou pode ser instalado para rodar localmente.
   
  ## Instalação e Execução
  
